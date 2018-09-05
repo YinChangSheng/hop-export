@@ -10,8 +10,8 @@
   <modules>
     <module>codeparser-api</module>
     <module>javacode-codeparser</module>
-      <module>registry-api</module>
-    <module>com.ydonglai.gitapi</module>
+    <module>registry-api</module>
+    <module>gitapi</module>
   </modules>
 
   <name>hopexport</name>
