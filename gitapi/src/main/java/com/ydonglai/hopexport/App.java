@@ -8,6 +8,7 @@ import org.eclipse.jgit.lib.Ref;
 import org.eclipse.jgit.lib.Repository;
 import org.eclipse.jgit.revwalk.RevCommit;
 import org.eclipse.jgit.storage.file.FileRepositoryBuilder;
+import org.eclipse.jgit.transport.PushResult;
 import org.eclipse.jgit.transport.RemoteConfig;
 import org.eclipse.jgit.transport.URIish;
 
@@ -38,14 +39,22 @@ public class App {
 
 		RevCommit thatCommit = commit
 				.setAuthor("donglai", "changsheng.yin@hipac.cn")
-				.setMessage("初始化仓库")
+				.setMessage("合并远程仓库")
 				.call();
 
-		URIish urIish = new URIish("https://github.com/YinChangSheng/hop-export.git");
+		PushCommand push = git.push();
 
-		RemoteAddCommand remoteAdd = git.remoteAdd().setName("origin").setUri(urIish);
+		Iterable<PushResult> pushResults = push.setOutputStream(System.out).setRemote("origin").add("master").call();
 
-		RemoteConfig config = remoteAdd.call();
+		for ( PushResult pushRes : pushResults ) {
+			System.out.println(pushRes);
+		}
+
+//		URIish urIish = new URIish("https://github.com/YinChangSheng/hop-export.git");
+//
+//		RemoteAddCommand remoteAdd = git.remoteAdd().setName("origin").setUri(urIish);
+//
+//		RemoteConfig config = remoteAdd.call();
 
 //		Iterable<RevCommit> log = git.log().call();
 //
