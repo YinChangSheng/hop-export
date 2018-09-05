@@ -49,6 +49,7 @@ public class App {
 				.setOutputStream(System.out)
 				.setRemote("origin")
 				.add("dev-donglai")
+				.add("master")
 				.call();
 
 		for ( PushResult pushRes : pushResults ) {
