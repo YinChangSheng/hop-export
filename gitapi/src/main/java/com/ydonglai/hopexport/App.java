@@ -8,9 +8,7 @@ import org.eclipse.jgit.lib.Ref;
 import org.eclipse.jgit.lib.Repository;
 import org.eclipse.jgit.revwalk.RevCommit;
 import org.eclipse.jgit.storage.file.FileRepositoryBuilder;
-import org.eclipse.jgit.transport.PushResult;
-import org.eclipse.jgit.transport.RemoteConfig;
-import org.eclipse.jgit.transport.URIish;
+import org.eclipse.jgit.transport.*;
 
 import java.io.File;
 import java.io.IOException;
@@ -22,6 +20,8 @@ import java.net.URISyntaxException;
 public class App {
 
 	public static void main(String[] args) throws IOException, GitAPIException, URISyntaxException {
+
+		CredentialsProvider cp = new UsernamePasswordCredentialsProvider("ychangsheng@gmail.com", "j851027github");
 
 		FileRepositoryBuilder builder = new FileRepositoryBuilder();
 
@@ -44,7 +44,7 @@ public class App {
 
 		PushCommand push = git.push();
 
-		Iterable<PushResult> pushResults = push.setOutputStream(System.out).setRemote("origin").add("master").call();
+		Iterable<PushResult> pushResults = push.setCredentialsProvider(cp).setOutputStream(System.out).setRemote("origin").add("master").call();
 
 		for ( PushResult pushRes : pushResults ) {
 			System.out.println(pushRes);
