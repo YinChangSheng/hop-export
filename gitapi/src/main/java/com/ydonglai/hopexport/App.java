@@ -44,10 +44,14 @@ public class App {
 
 		PushCommand push = git.push();
 
-		Iterable<PushResult> pushResults = push.setCredentialsProvider(cp).setOutputStream(System.out).setRemote("origin").add("master").call();
+		Iterable<PushResult> pushResults = push.setCredentialsProvider(cp)
+				.setOutputStream(System.out)
+				.setRemote("origin")
+				.add("dev-donglai")
+				.call();
 
 		for ( PushResult pushRes : pushResults ) {
-			System.out.println(pushRes);
+			System.out.println(pushRes.getMessages());
 		}
 
 //		URIish urIish = new URIish("https://github.com/YinChangSheng/hop-export.git");
